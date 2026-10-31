@@ -1,0 +1,24 @@
+<!doctype html>
+<html lang="ja">
+  <head>
+    <meta charset="utf-8" />
+    <meta http-equiv="Content-Security-Policy" content="default-src 'self'; style-src 'self'" />
+    <title>Clipboard Manager</title>
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <div class="panel">
+      <input id="search" type="text" placeholder="検索…" autocomplete="off" spellcheck="false" />
+      <ul id="list"></ul>
+      <div id="empty" class="empty" hidden>履歴がありません</div>
+      <footer>
+        <span><kbd>↑↓</kbd> 移動</span>
+        <span><kbd>⏎</kbd> コピー</span>
+        <span><kbd>⌘P</kbd> ピン</span>
+        <span><kbd>⌘⌫</kbd> 削除</span>
+        <span><kbd>esc</kbd> 閉じる</span>
+      </footer>
+    </div>
+    <script src="renderer.js"></script>
+  </body>
+</html>

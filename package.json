@@ -1,0 +1,47 @@
+{
+  "name": "clipboard-manager",
+  "productName": "Clipboard Manager",
+  "version": "1.0.0",
+  "description": "macOS menu bar clipboard manager (double-tap Cmd to open)",
+  "main": "src/main.js",
+  "author": "ryome",
+  "license": "MIT",
+  "scripts": {
+    "start": "electron .",
+    "dist": "electron-builder --mac"
+  },
+  "build": {
+    "appId": "com.ryome.clipboard-manager",
+    "productName": "Clipboard Manager",
+    "files": [
+      "src/**/*",
+      "package.json"
+    ],
+    "mac": {
+      "category": "public.app-category.productivity",
+      "target": [
+        {
+          "target": "dmg",
+          "arch": [
+            "arm64"
+          ]
+        }
+      ],
+      "extendInfo": {
+        "LSUIElement": true
+      },
+      "icon": "build/icon.icns"
+    }
+  },
+  "devDependencies": {
+    "electron": "^45.2.1",
+    "electron-builder": "^26.18.0"
+  },
+  "dependencies": {
+    "uiohook-napi": "^1.5.5"
+  },
+  "allowScripts": {
+    "electron@45.2.1": true,
+    "uiohook-napi@1.5.5": true
+  }
+}

@@ -1,0 +1,157 @@
+:root {
+  --bg: rgba(250, 250, 250, 0.96);
+  --fg: #1d1d1f;
+  --muted: #6e6e73;
+  --border: rgba(0, 0, 0, 0.1);
+  --input-bg: rgba(0, 0, 0, 0.05);
+  --selected: #0a64d8;
+  --selected-fg: #fff;
+  --pin: #e8a400;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --bg: rgba(36, 36, 38, 0.96);
+    --fg: #f5f5f7;
+    --muted: #98989d;
+    --border: rgba(255, 255, 255, 0.12);
+    --input-bg: rgba(255, 255, 255, 0.08);
+    --selected: #0a64d8;
+    --selected-fg: #fff;
+    --pin: #ffc83d;
+  }
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html,
+body {
+  margin: 0;
+  height: 100%;
+  background: transparent;
+  font: 13px -apple-system, BlinkMacSystemFont, 'Hiragino Sans', sans-serif;
+  color: var(--fg);
+  user-select: none;
+  overflow: hidden;
+}
+
+.panel {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  background: var(--bg);
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  overflow: hidden;
+}
+
+#search {
+  margin: 10px;
+  padding: 7px 10px;
+  border: none;
+  border-radius: 6px;
+  background: var(--input-bg);
+  color: var(--fg);
+  font: inherit;
+  outline: none;
+}
+
+#list {
+  flex: 1;
+  margin: 0;
+  padding: 0 6px 6px;
+  list-style: none;
+  overflow-y: auto;
+}
+
+#list li {
+  display: flex;
+  align-items: flex-start;
+  gap: 8px;
+  padding: 6px 8px;
+  border-radius: 6px;
+  cursor: default;
+}
+
+#list li.selected {
+  background: var(--selected);
+  color: var(--selected-fg);
+}
+
+#list li .text {
+  flex: 1;
+  min-width: 0;
+  white-space: pre-wrap;
+  word-break: break-all;
+  line-height: 1.4;
+  overflow: hidden;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 4;
+}
+
+#list li .pin {
+  flex: none;
+  width: 18px;
+  border: none;
+  background: none;
+  color: var(--muted);
+  font-size: 12px;
+  opacity: 0;
+  cursor: pointer;
+}
+
+#list li:hover .pin,
+#list li.selected .pin {
+  opacity: 0.8;
+}
+
+#list li.pinned .pin {
+  opacity: 1;
+  color: var(--pin);
+}
+
+#list li.selected .pin {
+  color: var(--selected-fg);
+}
+
+#list li .index {
+  flex: none;
+  line-height: 18px;
+  width: 14px;
+  color: var(--muted);
+  font-size: 11px;
+  text-align: right;
+}
+
+#list li.selected .index {
+  color: var(--selected-fg);
+}
+
+.divider {
+  margin: 4px 8px;
+  border-top: 1px solid var(--border);
+}
+
+.empty {
+  flex: 1;
+  color: var(--muted);
+  text-align: center;
+  padding-top: 40px;
+}
+
+footer {
+  display: flex;
+  gap: 10px;
+  padding: 6px 12px;
+  border-top: 1px solid var(--border);
+  color: var(--muted);
+  font-size: 11px;
+}
+
+kbd {
+  font: inherit;
+  font-weight: 600;
+}
