@@ -31,6 +31,9 @@ if (!app.requestSingleInstanceLock()) {
 
 function createPopup() {
   popup = new BrowserWindow({
+    // NSPanel (非アクティブ化パネル) にする。通常ウィンドウだとアプリのアクティブ化に伴って
+    // macOS が別の Space（フルスクリーンでないデスクトップ）へ切り替えてしまうため。
+    type: 'panel',
     width: WINDOW_WIDTH,
     height: WINDOW_HEIGHT,
     show: false,
@@ -49,7 +52,8 @@ function createPopup() {
       nodeIntegration: false,
     },
   });
-  popup.setVisibleOnAllWorkspaces(true, { visibleOnFullScreen: true });
+  // dock.hide() 済みで既に UIElement なので、プロセス種別の変換は不要（変換すると Space が切り替わる原因になる）
+  popup.setVisibleOnAllWorkspaces(true, { visibleOnFullScreen: true, skipTransformProcessType: true });
   popup.setAlwaysOnTop(true, 'pop-up-menu');
   popup.loadFile(path.join(__dirname, 'renderer', 'index.html'));
   popup.on('blur', () => hidePopup(false));
@@ -77,8 +81,8 @@ function showPopup() {
   positionNearCursor();
   popup.webContents.send('history:update', store.list());
   popup.webContents.send('popup:shown');
+  // パネルはアプリをアクティブ化せずにキーウィンドウになれるので app.focus({ steal: true }) は使わない
   popup.show();
-  app.focus({ steal: true });
   popup.focus();
 }
 
